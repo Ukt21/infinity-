@@ -4,7 +4,7 @@ from aiogram.types import Message
 
 from db import get_or_create_user
 from localization import t
-from keyboards.menu import main_menu_kb
+from keyboards.menus import main_menu_kb
 
 router = Router(name="start")
 
