@@ -39,16 +39,22 @@ async def on_set_language(callback: CallbackQuery):
 async def on_text_ai_menu(callback: CallbackQuery):
     user = get_or_create_user(callback.from_user.id)
     lang = user.language
-    await callback.message.edit_text(t(lang, "text_ai_choose_model"), reply_markup=text_models_kb(lang))
-    await callback.answer()
+    header = "🧠 Текстовые ИИ\n───────────────\n" if lang == "ru" else "🧠 Matnli AI\n───────────────\n"
+await callback.message.edit_text(
+    header + t(lang, "text_ai_choose_model"),
+    reply_markup=text_models_kb(lang)
+)
 
 
 @router.callback_query(F.data == "menu:image_ai")
 async def on_image_ai_menu(callback: CallbackQuery):
     user = get_or_create_user(callback.from_user.id)
     lang = user.language
-    await callback.message.edit_text(t(lang, "image_ai_choose_model"), reply_markup=image_models_kb(lang))
-    await callback.answer()
+    header = "🎨 Генерация изображений\n───────────────\n" if lang == "ru" else "🎨 Rasm yaratish\n───────────────\n"
+await callback.message.edit_text(
+    header + t(lang, "image_ai_choose_model"),
+    reply_markup=image_models_kb(lang)
+)
 
 
 @router.callback_query(F.data == "menu:profile")
